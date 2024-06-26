@@ -22,7 +22,7 @@ import static java.lang.String.format;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class AuthServiceImpl implements AuthService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -61,6 +61,7 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+    @Override
     public void syncWithIdp(OAuth2User oAuth2User) {
         Map<String, Object> attributes = oAuth2User.getAttributes();
         UserRequest request = mapOauth2AttributesToUser(attributes);
@@ -83,11 +84,13 @@ public class UserServiceImpl implements UserService{
         }
     }
 
-    public User getAuthenticationUserFromSecurityContext() {
+    @Override
+    public UserResponse getAuthenticationUserFromSecurityContext() {
         OAuth2User principal = (OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserRequest request = mapOauth2AttributesToUser(principal.getAttributes());
 
-        return userMapper.mapToUser(request);
+        User user = userMapper.mapToUser(request);
+        return userMapper.mapToUserResponse(user);
     }
 
     private UserRequest mapOauth2AttributesToUser (Map<String, Object> attributes) {
