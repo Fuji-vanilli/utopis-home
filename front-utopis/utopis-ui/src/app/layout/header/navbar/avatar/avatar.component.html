@@ -1,4 +1,11 @@
+
 <div class="avatar">
-    <i class="bi bi-list menu"></i>
-    <i class="bi bi-person-circle avatar"></i>
+    @if (!isConnected) {
+        <div class="not-login">
+            <a (click)="login()">Login</a>
+            <button class="btn btn-primary">Sing up</button>
+        </div>
+    } @else if (isConnected) {
+        <button class="btn btn-secondary">Logout</button>
+    }
 </div>

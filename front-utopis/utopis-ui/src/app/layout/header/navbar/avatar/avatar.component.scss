@@ -1,18 +1,11 @@
 @import '../../../../../assets/scss/bootstrap-variables';
 
 .avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: $primary;
-    padding: 4px 6px 4px 8px;
-    border-radius: 40px;
+  margin-right: 20px;
 
-    i.menu {
-        font-size: 18px;
-    }
-
-    i {
-        font-size: 28px;
-    }
+  a {
+    color: $white;
+    margin-right: 14px;
+    cursor: pointer;
+  }
 }
