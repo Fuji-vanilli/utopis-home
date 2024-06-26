@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/utopis.iml" filepath="$PROJECT_DIR$/utopis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../utopis-config-repo/utopis-config-repo.iml" filepath="$PROJECT_DIR$/../utopis-config-repo/utopis-config-repo.iml" />
     </modules>
   </component>
 </project>
