@@ -13,7 +13,7 @@ export class AvatarComponent  implements OnInit{
   location= inject(Location);
 
   connectedUser:User= {email: this.authService.notConnected};
-  isConnected: boolean= false;
+
 
   constructor() {
     effect(() => {

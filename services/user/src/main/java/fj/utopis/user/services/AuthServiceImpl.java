@@ -46,6 +46,7 @@ public class AuthServiceImpl implements AuthService{
         user.setLastModifiedDate(Instant.now());
         userRepository.save(user);
 
+        log.info("user updated successfully!");
         return userMapper.mapToUserResponse(user);
     }
 
@@ -80,6 +81,7 @@ public class AuthServiceImpl implements AuthService{
                 }
             }
         } else {
+            log.info("user created successfully!");
             userRepository.save(userMapper.mapToUser(request));
         }
     }
@@ -90,6 +92,7 @@ public class AuthServiceImpl implements AuthService{
         UserRequest request = mapOauth2AttributesToUser(principal.getAttributes());
 
         User user = userMapper.mapToUser(request);
+        log.info("user retrieved successfully!");
         return userMapper.mapToUserResponse(user);
     }
 
