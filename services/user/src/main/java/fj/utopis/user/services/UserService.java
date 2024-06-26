@@ -5,4 +5,5 @@ import fj.utopis.user.DTO.UserResponse;
 
 public interface UserService {
     UserResponse create(UserRequest request);
+    UserResponse updateUser(UserRequest request);
 }
