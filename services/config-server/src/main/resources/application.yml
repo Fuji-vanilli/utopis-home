@@ -1,0 +1,16 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: config-server
+
+  cloud:
+    compatibility-verifier:
+      enabled: true
+
+    config:
+      server:
+        git:
+          uri: https://github.com/Fuji-vanilli/utopis-config-repo.git
+
