@@ -17,9 +17,10 @@ export class AvatarComponent  implements OnInit{
 
   user: User | undefined;
 
+  result: string | undefined;
+
 
   constructor() {
-    this.authService.fetch();
     effect(() => {
       if (this.authService.fetchUser().status== 'OK') {
         this.connectedUser= this.authService.fetchUser().value!;
@@ -27,8 +28,23 @@ export class AvatarComponent  implements OnInit{
     });
   }
 
+  getTest() {
+    this.authService.fetchTest().subscribe({
+      next: resp=> {
+        this.result= resp;
+        console.log('resp: ', resp);
+        
+      }
+    })
+  }
+
   login() {
-    this.authService.login();
+    this.authService.login().subscribe({
+      next: response=> {
+        console.log("successed connexion");
+        
+      }
+    });
   }
 
   logout() {
@@ -36,20 +52,7 @@ export class AvatarComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    this.authService.fetchUserDetails().subscribe({
-      next: user=> {
-        this.user= {
-          username: user.username,
-          firstname: user.firstname,
-          email: user.email,
-          imageUrl: user.imageUrl
-        }
-      },
-      error: err=> {
-        console.log("error to fetch user details::");
-        
-      }
-    })
+    this.getTest();
   }
 
 }
