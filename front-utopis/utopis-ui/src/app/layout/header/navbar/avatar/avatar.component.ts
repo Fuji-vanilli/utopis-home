@@ -19,6 +19,7 @@ export class AvatarComponent  implements OnInit{
 
 
   constructor() {
+    this.authService.fetch();
     effect(() => {
       if (this.authService.fetchUser().status== 'OK') {
         this.connectedUser= this.authService.fetchUser().value!;

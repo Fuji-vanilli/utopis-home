@@ -1,7 +1,4 @@
 <div class="avatar">
-    <div *ngIf="!authService.isAuthenticated()">
-        <img src="{{user?.imageUrl}}" alt="">
-        <p>{{user?.firstname}}</p>
-        <p>{{user?.email}}</p>
-    </div>
+    <a href="" (click)="login()">Login</a>
+    <button class="btn btn-success">Sing up</button>
 </div>

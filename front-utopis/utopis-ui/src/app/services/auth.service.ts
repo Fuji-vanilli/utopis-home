@@ -22,8 +22,8 @@ export class AuthService {
 
   private fetchUser$: WritableSignal<State<User, HttpErrorResponse>> =
     signal(State.Builder<User, HttpErrorResponse>().forSuccess({email: this.notConnected}).build());
-  fetchUser = computed(() => this.fetchUser$());
-
+  
+  fetchUser = computed(() => this.fetchUser$()); 
 
   private triggerAuthPopup$: WritableSignal<AuthPopupState> = signal("CLOSE");
   authPopupStateChange = computed(() => this.triggerAuthPopup$());
@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   fetch(): void {
-    this.http.get<User>(`${environment.API_URL}/api/get-authenticated-user`)
+    this.http.get<User>(`${environment.API_URL}/api/user/get-authenticated-user`)
       .subscribe({
         next: user => this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forSuccess(user).build()),
         error: (err: HttpErrorResponse) => {
@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   login(): void {
-    location.href = `${location.origin}${this.location.prepareExternalUrl('oauth2/authorization/okta')}`;
+    location.href = 'api/user/get-authenticated-user';
   }
 
   logout(): void {
