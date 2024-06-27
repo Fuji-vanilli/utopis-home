@@ -2,6 +2,6 @@ export default [
   {
     context: ['/api', '/oauth2', '/login'],
     target: 'http://localhost:4100',
-    source: true
+    secure: false
   }
 ]

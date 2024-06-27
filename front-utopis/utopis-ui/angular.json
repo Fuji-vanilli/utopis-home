@@ -82,8 +82,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "utopis:build",
-            "proxyConfig": "proxy.conf.mjs"
+              "buildTarget": "utopis-ui:builder",
+              "proxyConfig": "proxy.conf.mjs"
           },
           "configurations": {
             "production": {

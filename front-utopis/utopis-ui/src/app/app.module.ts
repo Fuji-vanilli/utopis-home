@@ -8,7 +8,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { NavbarComponent } from './layout/header/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AvatarComponent } from './layout/header/navbar/avatar/avatar.component';
-import { provideHttpClient, withXsrfConfiguration } from '@angular/common/http';
+import {provideHttpClient, withFetch, withXsrfConfiguration} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { provideHttpClient, withXsrfConfiguration } from '@angular/common/http';
   providers: [
     provideClientHydration(),
     provideHttpClient(
+      withFetch(),
       withXsrfConfiguration({
         cookieName: 'XSRF-TOKEN',
         headerName: 'X-XSRF-TOKEN'

@@ -1,37 +1,49 @@
-import {HttpClient, HttpErrorResponse, HttpStatusCode} from '@angular/common/http';
 import {computed, inject, Injectable, signal, WritableSignal} from '@angular/core';
-import {State} from "../models/state.model";
-import {User} from "../models/user.model";
+import {HttpClient, HttpErrorResponse, HttpStatusCode} from "@angular/common/http";
 import {Location} from "@angular/common";
-import { environment } from '../../environments/environment.development';
+import {environment} from "../../environments/environment";
+import { State } from '../models/state.model';
+import { User } from '../models/user.model';
+import { Observable } from 'rxjs';
+
+
+export type AuthPopupState = "OPEN" | "CLOSE"
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  httpClient= inject(HttpClient);
-  location= inject(Location);
+  http = inject(HttpClient);
 
-  notConnected: string= 'NOT-CONNECTED';
+  location = inject(Location);
+
+  notConnected = 'NOT_CONNECTED';
 
   private fetchUser$: WritableSignal<State<User, HttpErrorResponse>> =
     signal(State.Builder<User, HttpErrorResponse>().forSuccess({email: this.notConnected}).build());
-
   fetchUser = computed(() => this.fetchUser$());
-  constructor() { }
 
-  fetch() {
-    this.httpClient.get('${environment.APP_URL}/api/user/get-authenticated-user').subscribe({
-      next: user=> this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forSuccess(user).build()),
-      error: (err: HttpErrorResponse) => {
-        if (err.status === HttpStatusCode.Unauthorized && this.isAuthenticated()) {
-          this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forSuccess({email: this.notConnected}).build());
-        } else {
-          this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forError(err).build());
+
+  private triggerAuthPopup$: WritableSignal<AuthPopupState> = signal("CLOSE");
+  authPopupStateChange = computed(() => this.triggerAuthPopup$());
+
+  fetchUserDetails(): Observable<any> {
+    return this.http.get('/api/user/get-authenticated-user');
+  }
+
+  fetch(): void {
+    this.http.get<User>(`${environment.API_URL}/api/get-authenticated-user`)
+      .subscribe({
+        next: user => this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forSuccess(user).build()),
+        error: (err: HttpErrorResponse) => {
+          if (err.status === HttpStatusCode.Unauthorized && this.isAuthenticated()) {
+            this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forSuccess({email: this.notConnected}).build());
+          } else {
+            this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forError(err).build());
+          }
         }
-      }
-    })
+      });
   }
 
   isAuthenticated(): boolean {
@@ -47,7 +59,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.httpClient.post(`${environment.APP_URL}/api/logout`, {}, {withCredentials: true})
+    this.http.post('/api/user/logout', {}, {withCredentials: true})
       .subscribe({
         next: (response: any) => {
           this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forSuccess({email: this.notConnected}).build());
@@ -56,5 +68,10 @@ export class AuthService {
       })
   }
 
+  openOrCloseAuthPopup(state: AuthPopupState) {
+    this.triggerAuthPopup$.set(state);
+  }
 
+  constructor() {
+  }
 }

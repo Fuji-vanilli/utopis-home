@@ -2,6 +2,7 @@ import {Component, effect, inject, OnInit} from '@angular/core';
 import {AuthService} from "../../../../services/auth.service";
 import {Location} from "@angular/common";
 import {User} from "../../../../models/user.model";
+import { log } from 'console';
 
 @Component({
   selector: 'app-avatar',
@@ -13,6 +14,8 @@ export class AvatarComponent  implements OnInit{
   location= inject(Location);
 
   connectedUser:User= {email: this.authService.notConnected};
+
+  user: User | undefined;
 
 
   constructor() {
@@ -32,6 +35,20 @@ export class AvatarComponent  implements OnInit{
   }
 
   ngOnInit(): void {
+    this.authService.fetchUserDetails().subscribe({
+      next: user=> {
+        this.user= {
+          username: user.username,
+          firstname: user.firstname,
+          email: user.email,
+          imageUrl: user.imageUrl
+        }
+      },
+      error: err=> {
+        console.log("error to fetch user details::");
+        
+      }
+    })
   }
 
 }

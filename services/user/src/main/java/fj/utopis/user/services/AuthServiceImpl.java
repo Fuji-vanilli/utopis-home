@@ -3,14 +3,18 @@ package fj.utopis.user.services;
 import fj.utopis.user.DTO.UserRequest;
 import fj.utopis.user.DTO.UserResponse;
 import fj.utopis.user.entities.User;
+import fj.utopis.user.exception.UserNotFoundException;
 import fj.utopis.user.mapper.UserMapper;
 import fj.utopis.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.Instant;
 import java.util.Map;
@@ -25,7 +29,6 @@ import static java.lang.String.format;
 public class AuthServiceImpl implements AuthService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-
 
     @Override
     public UserResponse create(UserRequest request) {
@@ -68,18 +71,7 @@ public class AuthServiceImpl implements AuthService{
         UserRequest request = mapOauth2AttributesToUser(attributes);
         Optional<User> existingUser = userRepository.findOneByEmail(request.email());
         if (existingUser.isPresent()) {
-            if (attributes.get("updated_at") != null) {
-                Instant dbLastModifiedDate = existingUser.orElseThrow().getLastModifiedDate();
-                Instant idpModifiedDate;
-                if(attributes.get("updated_at") instanceof Instant) {
-                    idpModifiedDate = (Instant) attributes.get("updated_at");
-                } else {
-                    idpModifiedDate = Instant.ofEpochSecond((Integer) attributes.get("updated_at"));
-                }
-                if(idpModifiedDate.isAfter(dbLastModifiedDate)) {
-                    updateUser(request);
-                }
-            }
+            log.info("already exist");
         } else {
             log.info("user created successfully!");
             userRepository.save(userMapper.mapToUser(request));
