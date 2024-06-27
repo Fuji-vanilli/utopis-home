@@ -3,6 +3,32 @@
     <a (click)="login">Login</a>
     <button class="btn btn-success" (click)="login()">Sing up</button>
    } @else {
-    <img src="{{connectedUser.imageUrl}}" alt="">
+    
+    <ul>
+        <li>
+            
+        </li>
+        <li>
+            <img src="{{connectedUser.imageUrl}}" alt="">
+            <ul>
+                <li class="sub-item">
+                    <fa-icon [icon]="['fas','circle-user']"></fa-icon>
+                    <span>Profile</span>
+                </li>
+                <li class="sub-item">
+                    <fa-icon [icon]="['fas','gear']"></fa-icon>
+                    <span>Settigns</span>
+                </li>
+                <li class="sub-item">
+                    <fa-icon [icon]="['fas','right-from-bracket']"></fa-icon>
+                    <span>Logout</span>
+                </li>
+                <li class="sub-item">
+                    <fa-icon [icon]="['fas','circle-question']"></fa-icon>
+                    <span>Help</span>
+                </li>
+            </ul>
+        </li>
+    </ul>
    }
 </div>
