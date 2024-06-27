@@ -1,4 +1,8 @@
 <div class="avatar">
-    <a href="" (click)="login">Login</a>
+   @if (!authService.isAuthenticated()) {
+    <a (click)="login">Login</a>
     <button class="btn btn-success" (click)="login()">Sing up</button>
+   } @else {
+    <img src="{{connectedUser.imageUrl}}" alt="">
+   }
 </div>

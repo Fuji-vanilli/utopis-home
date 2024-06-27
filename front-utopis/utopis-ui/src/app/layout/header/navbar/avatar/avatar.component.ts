@@ -28,31 +28,16 @@ export class AvatarComponent  implements OnInit{
     });
   }
 
-  getTest() {
-    this.authService.fetchTest().subscribe({
-      next: resp=> {
-        this.result= resp;
-        console.log('resp: ', resp);
-        
-      }
-    })
+  ngOnInit(): void {
+    this.authService.fetch();
   }
 
   login() {
-    this.authService.login().subscribe({
-      next: response=> {
-        console.log("successed connexion");
-        
-      }
-    });
+    this.authService.login();
   }
 
   logout() {
     this.authService.logout();
-  }
-
-  ngOnInit(): void {
-    this.getTest();
   }
 
 }

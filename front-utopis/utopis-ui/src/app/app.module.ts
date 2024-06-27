@@ -8,7 +8,9 @@ import { HeaderComponent } from './layout/header/header.component';
 import { NavbarComponent } from './layout/header/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AvatarComponent } from './layout/header/navbar/avatar/avatar.component';
-import {provideHttpClient, withFetch, withXsrfConfiguration} from '@angular/common/http';
+import {provideHttpClient, withFetch, withInterceptors, withXsrfConfiguration} from '@angular/common/http';
+import { authInterceptor } from './interceptors/auth.interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,13 @@ import {provideHttpClient, withFetch, withXsrfConfiguration} from '@angular/comm
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ],
   providers: [
     provideClientHydration(),
     provideHttpClient(
-      withFetch(),
+      withInterceptors([authInterceptor]),
       withXsrfConfiguration({
         cookieName: 'XSRF-TOKEN',
         headerName: 'X-XSRF-TOKEN'
