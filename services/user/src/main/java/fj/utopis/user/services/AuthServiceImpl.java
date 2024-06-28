@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,20 @@ import static java.lang.String.format;
 public class AuthServiceImpl implements AuthService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
+
+    @Override
+    public User createUserFromOAuth2Login(OAuth2AuthenticationToken authentication) {
+        Map<String, Object> attributes = authentication.getPrincipal().getAttributes();
+        User user= User.builder()
+                .username(authentication.getName())
+                .firstname(attributes.get("preferred_username").toString())
+                .lastname(attributes.get("given_name").toString())
+                .email(attributes.get("email").toString())
+                .build();
+
+        return userRepository.save(user);
+    }
 
     @Override
     public UserResponse create(UserRequest request) {
