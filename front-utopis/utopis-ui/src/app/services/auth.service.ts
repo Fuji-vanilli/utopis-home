@@ -28,7 +28,7 @@
     authPopupStateChange = computed(() => this.triggerAuthPopup$());
 
     fetch(): void {
-      this.http.get<User>(`${environment.API_URL}/api/user/get-authenticated-user`)
+      this.http.get<User>(`${environment.API_URL}/USER-SERVICE/api/user/get-authenticated-user`)
         .subscribe({
           next: user => this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forSuccess(user).build()),
           error: (err: HttpErrorResponse) => {
@@ -54,7 +54,7 @@
     }
 
     logout(): void {
-      this.http.post(`${environment.API_URL}/api/user/logout`, {}, {withCredentials: true})
+      this.http.post(`${environment.API_URL}/USER-SERVICE/api/user/logout`, {}, {withCredentials: true})
         .subscribe({
           next: (response: any) => {
             this.fetchUser$.set(State.Builder<User, HttpErrorResponse>().forSuccess({email: this.notConnected}).build());
