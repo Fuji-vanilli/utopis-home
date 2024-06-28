@@ -1,7 +1,7 @@
 <div class="avatar">
    @if (!authService.isAuthenticated()) {
-    <a (click)="login">Login</a>
-    <button class="btn btn-success" (click)="login()">Sing up</button>
+    <a (click)="login" class="login">Login</a>
+    <button class="btn btn-primary" (click)="login()">Sing up</button>
    } @else {
     
     <ul>

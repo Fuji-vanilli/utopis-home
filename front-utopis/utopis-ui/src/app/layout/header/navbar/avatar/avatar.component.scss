@@ -3,6 +3,14 @@
 .avatar {
   margin-right: 30px;
 
+  .login {
+    color: $dark; 
+  }
+
+  .btn {
+    color: $white;
+  }
+
   a {
     color: $white;
     margin-right: 14px;
@@ -41,8 +49,8 @@ li ul {
   background-color: $white;
   align-items: flex-start;
   padding: 1rem 1rem;
-  width: 20rem;
-  right: -6rem;
+  width: 15rem;
+  right: -2rem;
   top: 3.3rem;
   border-radius: 0.6rem; 
   gap: 0;
@@ -71,7 +79,7 @@ li ul {
     }
   
     span {
-      color: $dark;
+      color: $dark
     }
 
   }
