@@ -38,13 +38,13 @@ li {
 li ul {
   flex-direction: column;
   position: absolute;
-  background-color: $dark;
+  background-color: $white;
   align-items: flex-start;
-  padding: 1rem 0;
+  padding: 1rem 1rem;
   width: 20rem;
   right: -6rem;
   top: 3.3rem;
-  border-radius: 0.6rem;
+  border-radius: 0.6rem; 
   gap: 0;
   //box-shadow: 0 0 100px rgba(20, 18, 0.25);
   opacity: 0;
@@ -59,7 +59,7 @@ li ul {
     padding: 0.5rem 1.5rem;
 
     fa-icon {
-      color: $secondary;
+      color: $dark;
       font-size: 16px;
       transition: all 0.5s ease;
     }
@@ -71,20 +71,21 @@ li ul {
     }
   
     span {
-      color: $secondary;
+      color: $dark;
     }
 
   }
 
   .sub-item:hover {
-    background: $input-bg;
+    background: #ffffff;
     cursor: pointer;
     border-radius: 0.5rem;
+
   }
 
   .sub-item:hover fa-icon {
     color: $primary;
-    transform: scale(1.08) translateY(-2px);
+    transform: scale(1.08) translateY(-2px); 
   }
 }
 

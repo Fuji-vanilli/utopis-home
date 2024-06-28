@@ -6,7 +6,7 @@
     
     <ul>
         <li>
-            
+
         </li>
         <li>
             <img src="{{connectedUser.imageUrl}}" alt="">
@@ -19,7 +19,7 @@
                     <fa-icon [icon]="['fas','gear']"></fa-icon>
                     <span>Settigns</span>
                 </li>
-                <li class="sub-item">
+                <li class="sub-item" (click)="logout()">
                     <fa-icon [icon]="['fas','right-from-bracket']"></fa-icon>
                     <span>Logout</span>
                 </li>
