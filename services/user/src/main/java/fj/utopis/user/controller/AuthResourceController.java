@@ -13,6 +13,4 @@ public interface AuthResourceController {
     ResponseEntity<UserResponse> getAuthenticatedUser(
             @AuthenticationPrincipal OAuth2User user
     );
-    @PostMapping("/logout")
-    ResponseEntity<?> logout(HttpServletRequest request);
 }
