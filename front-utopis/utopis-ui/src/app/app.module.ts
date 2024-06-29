@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,9 +8,24 @@ import { HeaderComponent } from './layout/header/header.component';
 import { NavbarComponent } from './layout/header/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AvatarComponent } from './layout/header/navbar/avatar/avatar.component';
-import {provideHttpClient, withFetch, withInterceptors, withXsrfConfiguration} from '@angular/common/http';
-import { authInterceptor } from './interceptors/auth.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { KeycloakService } from 'keycloak-angular';
+
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8080',
+        realm: 'utopis-realm',
+        clientId: 'utopis-client'
+      },
+      initOptions: {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri:
+          window.location.origin + '/assets/silent-check-sso.html'
+      }
+    });
+}
 
 @NgModule({
   declarations: [
@@ -27,14 +42,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule
   ],
   providers: [
-    provideClientHydration(),
-    provideHttpClient(
-      withInterceptors([authInterceptor]),
-      withXsrfConfiguration({
-        cookieName: 'XSRF-TOKEN',
-        headerName: 'X-XSRF-TOKEN'
-      })
-    )
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    }
   ],
   bootstrap: [AppComponent]
 })

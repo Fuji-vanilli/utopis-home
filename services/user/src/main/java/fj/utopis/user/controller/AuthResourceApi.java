@@ -27,15 +27,8 @@ public class AuthResourceApi implements AuthResourceController {
     private final AuthService authService;
 
     @GetMapping("/auth-resource")
-    public Map<String, Object> getAuth() {
-        Map<String, Object> tokenAttributes= Map.of();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
-            tokenAttributes= jwtAuthenticationToken.getTokenAttributes();
-        }
-
-        return tokenAttributes;
+    public Authentication getAuth(Authentication authentication) {
+        return authentication;
     }
 
     @Override

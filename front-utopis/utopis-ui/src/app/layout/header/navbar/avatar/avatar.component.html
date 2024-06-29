@@ -1,15 +1,12 @@
 <div class="avatar">
-   @if (!authService.isAuthenticated()) {
-    <a (click)="login" class="login">Login</a>
-    <button class="btn btn-primary" (click)="login()">Sing up</button>
-   } @else {
-    
+    <a class="login">Login</a>
+    <button class="btn btn-primary" >Sing up</button>    
     <ul>
         <li>
 
         </li>
         <li>
-            <img src="{{connectedUser.imageUrl}}" alt="">
+            <img>
             <ul>
                 <li class="sub-item">
                     <fa-icon [icon]="['fas','circle-user']"></fa-icon>
@@ -19,7 +16,7 @@
                     <fa-icon [icon]="['fas','gear']"></fa-icon>
                     <span>Settigns</span>
                 </li>
-                <li class="sub-item" (click)="logout()">
+                <li class="sub-item">
                     <fa-icon [icon]="['fas','right-from-bracket']"></fa-icon>
                     <span>Logout</span>
                 </li>
@@ -30,5 +27,4 @@
             </ul>
         </li>
     </ul>
-   }
 </div>

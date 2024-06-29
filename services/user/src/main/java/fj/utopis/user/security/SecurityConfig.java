@@ -29,8 +29,10 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth-> auth.requestMatchers("/api/user/test").permitAll())
+                .authorizeHttpRequests(auth-> auth.requestMatchers("/api/user/auth-resource").hasAuthority("ADMIN"))
                 .authorizeHttpRequests(auth-> auth.anyRequest().authenticated())
-                .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .oauth2ResourceServer(auth-> auth.jwt(jwt-> jwt.jwtAuthenticationConverter(jwtAuthConverter)));
 
         return httpSecurity.build();
     }
