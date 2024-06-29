@@ -13,6 +13,6 @@ export class UserService {
   constructor() { }
 
   getAuthResource(): Observable<any> {
-    return this.httpClient.get(environment.API_URL+'/api/user/get-resource');
+    return this.httpClient.get(environment.API_URL+'/USER-SERVICE/api/user/auth-resource');
   }
 }

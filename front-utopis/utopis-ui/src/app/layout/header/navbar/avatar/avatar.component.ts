@@ -1,4 +1,5 @@
 import {Component, effect, inject, OnInit} from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-avatar',
@@ -6,9 +7,15 @@ import {Component, effect, inject, OnInit} from '@angular/core';
   styleUrl: './avatar.component.scss'
 })
 export class AvatarComponent  implements OnInit{
+
+  kcService= inject(KeycloakService);
+
   ngOnInit(): void {
 
   }
   
+  logout() {
+    this.kcService.logout(window.location.origin);
+  }
 
 }
