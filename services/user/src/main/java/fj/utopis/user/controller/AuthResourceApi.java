@@ -23,12 +23,6 @@ import static fj.utopis.user.utils.Root.APP_ROOT;
 public class AuthResourceApi implements AuthResourceController {
     private final AuthService authService;
 
-
-    @GetMapping("/")
-    public ResponseEntity<String> home(@AuthenticationPrincipal OAuth2User principal) {
-        return ResponseEntity.ok(principal.getAttribute("email"));
-    }
-
     @GetMapping("/test")
     public String getTest() {
         return "Test is successfully";
