@@ -9,7 +9,8 @@ import { NavbarComponent } from './layout/header/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AvatarComponent } from './layout/header/navbar/avatar/avatar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { KeycloakService } from 'keycloak-angular';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { UserComponent } from './user/user.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -22,7 +23,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       initOptions: {
         onLoad: 'check-sso',
         silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html'
+          '/assets/silent-check-sso.html'
       }
     });
 }
@@ -33,13 +34,15 @@ function initializeKeycloak(keycloak: KeycloakService) {
     HeaderComponent,
     NavbarComponent,
     FooterComponent,
-    AvatarComponent
+    AvatarComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    KeycloakAngularModule
   ],
   providers: [
     {
