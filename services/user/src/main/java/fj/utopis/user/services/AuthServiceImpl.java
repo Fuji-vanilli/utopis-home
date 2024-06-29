@@ -19,7 +19,7 @@ import java.util.Optional;
 
 import static java.lang.String.format;
 
-@Service
+//@Service
 @Transactional
 @Slf4j
 @RequiredArgsConstructor

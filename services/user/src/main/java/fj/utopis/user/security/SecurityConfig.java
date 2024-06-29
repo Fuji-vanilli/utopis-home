@@ -28,12 +28,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                //.authorizeHttpRequests(auth-> auth.requestMatchers(APP_ROOT+"/test").permitAll())
-                .authorizeHttpRequests(auth-> auth.anyRequest().authenticated());
-
-        httpSecurity
-                .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(oauth2-> oauth2.jwt(jwt-> jwt.jwtAuthenticationConverter(jwtAuthConverter)));
+                .authorizeHttpRequests(auth-> auth.requestMatchers("/api/user/test").permitAll())
+                .authorizeHttpRequests(auth-> auth.anyRequest().authenticated())
+                .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return httpSecurity.build();
     }

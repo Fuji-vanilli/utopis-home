@@ -7,12 +7,15 @@ import fj.utopis.user.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static fj.utopis.user.utils.Root.APP_ROOT;
@@ -23,9 +26,16 @@ import static fj.utopis.user.utils.Root.APP_ROOT;
 public class AuthResourceApi implements AuthResourceController {
     private final AuthService authService;
 
-    @GetMapping("/test")
-    public String getTest() {
-        return "Test is successfully";
+    @GetMapping("/auth-resource")
+    public Map<String, Object> getAuth() {
+        Map<String, Object> tokenAttributes= Map.of();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            tokenAttributes= jwtAuthenticationToken.getTokenAttributes();
+        }
+
+        return tokenAttributes;
     }
 
     @Override
