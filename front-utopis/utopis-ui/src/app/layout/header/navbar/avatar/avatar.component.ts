@@ -1,5 +1,5 @@
 import {Component, effect, inject, OnInit} from '@angular/core';
-import { KeycloakService } from 'keycloak-angular';
+import { KeycloakEvent, KeycloakEventType, KeycloakService } from 'keycloak-angular';
 import { UserService } from '../../../../services/user.service';
 import { User } from '../../../../models/user.model';
 
@@ -15,24 +15,32 @@ export class AvatarComponent  implements OnInit{
 
   user: User | undefined;
 
-  ngOnInit(): void {
+  constructor() {
+    this.kcService.keycloakEvents$.subscribe(
+      (event: KeycloakEvent)=> {
+        if (event.type === KeycloakEventType.OnAuthSuccess) {
+          console.log('success login');
+        }
+      }
+    )
+  }
 
+  ngOnInit(): void {
+    this.getUserConnected();
   }
 
   login() {
-    this.kcService.login().then(
-      ()=> this.userService.registerUser().subscribe({
-        next: user=> {
-          this.user= user;
-          console.log('user: '+user);
-          
-        },
-        error: err=> {
-          console.log('error: '+err);
-          
-        }
-      })
-    );
+    this.kcService.login(); 
+  }
+
+  getUserConnected() {
+    this.userService.getUserConnected().subscribe({
+      next: user=> {
+        this.user= user;
+        console.log('username: '+this.user?.username);
+        
+      }
+    })
   }
   
   logout() {

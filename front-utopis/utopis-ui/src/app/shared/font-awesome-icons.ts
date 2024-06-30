@@ -1,4 +1,6 @@
 import {
+  faCartPlus,
+  faCartShopping,
   faCircleQuestion,
   faCircleUser,
   faGear, faMagnifyingGlass,
@@ -11,5 +13,7 @@ export const fontAwesomeIcons: IconDefinition[]= [
   faGear,
   faCircleUser,
   faCircleQuestion,
-  faMagnifyingGlass
+  faMagnifyingGlass,
+  faCartPlus,
+  faCartShopping
 ]

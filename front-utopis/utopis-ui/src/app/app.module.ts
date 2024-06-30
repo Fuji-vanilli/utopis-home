@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -36,7 +37,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NavbarComponent,
     FooterComponent,
     AvatarComponent,
-    UserComponent
+    UserComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

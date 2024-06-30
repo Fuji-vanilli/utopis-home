@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
       this.userService.getUserConnected().subscribe({
         next: response=> {
           this.user= response;
-          console.log('email: '+this.email);
+          console.log('email: '+this.user?.email);
           
         }
       })

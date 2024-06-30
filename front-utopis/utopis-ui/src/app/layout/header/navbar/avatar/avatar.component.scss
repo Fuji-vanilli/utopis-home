@@ -29,6 +29,26 @@
   }
 }
 
+.make-online {
+  cursor: pointer;
+  fa-icon {
+    font-size: 20px;
+    color: $dark;
+  }
+
+  span {
+    margin-left: 12px;
+  }
+}
+
+.make-online:hover {
+  color: $primary;
+
+  fa-icon {
+    color: $primary;
+  }
+}
+
 ul {
   margin: 0;
   padding: 0;
