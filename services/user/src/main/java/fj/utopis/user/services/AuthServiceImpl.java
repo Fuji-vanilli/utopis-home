@@ -23,7 +23,7 @@ import static java.lang.String.format;
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 

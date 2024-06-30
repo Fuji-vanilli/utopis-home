@@ -8,15 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
-import java.util.Objects;
 
 import static fj.utopis.user.utils.Root.APP_ROOT;
 
@@ -32,13 +26,8 @@ public class AuthResourceApi implements AuthResourceController {
     }
 
     @Override
-    public ResponseEntity<UserResponse> getAuthenticatedUser(OAuth2User user) {
-        if (Objects.isNull(user)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-
-
-        return ResponseEntity.ok(null);
+    public ResponseEntity<UserResponse> registerUserFromOAuth2(Authentication authentication) {
+        return ResponseEntity.ok(authService.registerUserFromOAuth2(authentication));
     }
 
 }
