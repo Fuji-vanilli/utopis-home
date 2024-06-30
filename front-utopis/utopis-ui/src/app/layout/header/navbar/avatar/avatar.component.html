@@ -1,14 +1,14 @@
 <div class="avatar">
     @if (!kcService.isLoggedIn()) {
-        <a class="login">Login</a>
-    <button class="btn btn-primary" >Sing up</button>   
+        <a class="login" (click)="login()">Login</a>
+    <button class="btn btn-primary" (click)="login()">Sing up</button>   
     } @else {
         <ul>
             <li>
     
             </li>
             <li>
-                <img>
+                <img src="">
                 <ul>
                     <li class="sub-item">
                         <fa-icon [icon]="['fas','circle-user']"></fa-icon>

@@ -36,10 +36,9 @@ public class AuthResourceApi implements AuthResourceController {
         if (Objects.isNull(user)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        authService.syncWithIdp(user);
-        UserResponse userAuthenticated = authService.getAuthenticationUserFromSecurityContext();
 
-        return ResponseEntity.ok(userAuthenticated);
+
+        return ResponseEntity.ok(null);
     }
 
 }

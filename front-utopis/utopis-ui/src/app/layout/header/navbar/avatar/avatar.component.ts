@@ -13,6 +13,10 @@ export class AvatarComponent  implements OnInit{
   ngOnInit(): void {
 
   }
+
+  login() {
+    this.kcService.login();
+  }
   
   logout() {
     this.kcService.logout(window.location.origin);

@@ -22,25 +22,4 @@ import java.util.Map;
 public class AuthServiceUser implements AuthService {
     private final UserRepository repository;
 
-    @Override
-    public UserResponse create(UserRequest request) {
-        return null;
-    }
-
-    @Override
-    public void syncWithIdp(OAuth2User oAuth2User) {
-
-    }
-
-    @Override
-    public UserResponse updateUser(UserRequest request) {
-        return null;
-    }
-
-    @Override
-    public UserResponse getAuthenticationUserFromSecurityContext() {
-
-        return null;
-
-    }
 }

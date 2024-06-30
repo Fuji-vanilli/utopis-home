@@ -27,12 +27,12 @@ public class AuthServiceImpl implements AuthService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    @Override
+
     public UserResponse create(UserRequest request) {
         return null;
     }
 
-    @Override
+
     public UserResponse updateUser(UserRequest request) {
         var userOptional= userRepository.findOneByEmail(request.email());
         if (userOptional.isEmpty()) {
@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService{
         }
     }
 
-    @Override
+
     public void syncWithIdp(OAuth2User oAuth2User) {
         Map<String, Object> attributes = oAuth2User.getAttributes();
         UserRequest request = mapOauth2AttributesToUser(attributes);
@@ -75,7 +75,7 @@ public class AuthServiceImpl implements AuthService{
         }
     }
 
-    @Override
+
     public UserResponse getAuthenticationUserFromSecurityContext() {
         OAuth2User principal = (OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserRequest request = mapOauth2AttributesToUser(principal.getAttributes());
