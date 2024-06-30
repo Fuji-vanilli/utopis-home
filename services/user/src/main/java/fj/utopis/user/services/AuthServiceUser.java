@@ -61,4 +61,23 @@ public class AuthServiceUser implements AuthService {
         userRepository.save(user);
         return userMapper.mapToUserResponse(user);
     }
+
+    @Override
+    public UserResponse getCurrentUserConnected() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email= "";
+        if (authentication instanceof JwtAuthenticationToken jwtAuthenticationToken) {
+            email= jwtAuthenticationToken.getTokenAttributes().get("email").toString();
+        }
+
+        Optional<User> userOptional= userRepository.findOneByEmail(email);
+        if (userOptional.isEmpty()) {
+            log.info("User {} not found", email);
+            throw new UserNotFoundException("user not found");
+        }
+
+        User user = userOptional.get();
+
+        return userMapper.mapToUserResponse(user);
+    }
 }

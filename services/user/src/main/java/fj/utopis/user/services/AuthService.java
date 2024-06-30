@@ -6,4 +6,5 @@ import org.springframework.security.core.Authentication;
 
 public interface AuthService {
     UserResponse registerUserFromOAuth2(Authentication authentication);
+    UserResponse getCurrentUserConnected();
 }

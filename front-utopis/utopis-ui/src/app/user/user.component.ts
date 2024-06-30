@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-user',
@@ -11,11 +12,12 @@ export class UserComponent implements OnInit {
     userService= inject(UserService);
 
     email: string= 'NOT_EMAIL_FOUND';
+    user: User | undefined;
 
     ngOnInit(): void {
       this.userService.getAuthResource().subscribe({
         next: response=> {
-          this.email= response.tokenAttributes.email;
+          this.user= response;
           console.log('email: '+this.email);
           
         }

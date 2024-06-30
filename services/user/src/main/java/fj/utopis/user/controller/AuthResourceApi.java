@@ -30,4 +30,9 @@ public class AuthResourceApi implements AuthResourceController {
         return ResponseEntity.ok(authService.registerUserFromOAuth2(authentication));
     }
 
+    @Override
+    public ResponseEntity<UserResponse> getAuthenticatedUser() {
+        return ResponseEntity.ok(authService.getCurrentUserConnected());
+    }
+
 }
