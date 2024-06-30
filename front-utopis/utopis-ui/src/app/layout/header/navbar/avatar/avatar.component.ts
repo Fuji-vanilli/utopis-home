@@ -21,7 +21,7 @@ export class AvatarComponent  implements OnInit{
 
   login() {
     this.kcService.login();
-    this.userService.getAuthResource().subscribe({
+    this.userService.registerUser().subscribe({
       next: user=> {
         this.user= user;
         console.log('user: '+user);

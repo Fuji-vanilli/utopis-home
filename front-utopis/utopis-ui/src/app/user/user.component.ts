@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
     user: User | undefined;
 
     ngOnInit(): void {
-      this.userService.getAuthResource().subscribe({
+      this.userService.getUserConnected().subscribe({
         next: response=> {
           this.user= response;
           console.log('email: '+this.email);
