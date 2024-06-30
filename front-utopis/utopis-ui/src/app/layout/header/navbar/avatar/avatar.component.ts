@@ -20,18 +20,19 @@ export class AvatarComponent  implements OnInit{
   }
 
   login() {
-    this.kcService.login();
-    this.userService.registerUser().subscribe({
-      next: user=> {
-        this.user= user;
-        console.log('user: '+user);
-        
-      },
-      error: err=> {
-        console.log('error: '+err);
-        
-      }
-    });
+    this.kcService.login().then(
+      ()=> this.userService.registerUser().subscribe({
+        next: user=> {
+          this.user= user;
+          console.log('user: '+user);
+          
+        },
+        error: err=> {
+          console.log('error: '+err);
+          
+        }
+      })
+    );
   }
   
   logout() {
