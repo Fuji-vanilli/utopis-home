@@ -49,6 +49,21 @@ services:
     networks:
       - utopis-networks
 
+  mongodb-property:
+    image: mongo
+    container_name: mongodb-property
+    ports:
+      - "27018:27017"
+    expose:
+      - "27018"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ixml
+      MONGO_INITDB_ROOT_PASSWORD: 1234
+    volumes:
+      - mongo-property-data:/data/db
+    networks:
+      - utopis-networks
+
   mongo-expres:
     image: mongo-express
     ports:
@@ -68,5 +83,6 @@ networks:
 
 volumes:
   mongo-user-data:
+  mongo-property-data:
   postgres-kc-data:
   kc-data:

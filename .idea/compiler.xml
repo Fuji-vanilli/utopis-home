@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
+        <module name="property-service" />
         <module name="user" />
         <module name="discovery-service" />
         <module name="gateway-service" />
@@ -19,6 +20,7 @@
       <module name="config-server" options="-parameters" />
       <module name="discovery-service" options="-parameters" />
       <module name="gateway-service" options="-parameters" />
+      <module name="property-service" options="-parameters" />
       <module name="user" options="-parameters" />
     </option>
   </component>
