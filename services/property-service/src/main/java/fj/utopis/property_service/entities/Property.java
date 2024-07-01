@@ -25,6 +25,7 @@ public class Property {
     private BigDecimal price;
     private BigDecimal numberOfRooms;
     private BigDecimal numberOfBathrooms;
+    private String country;
     private List<String> images;
     private BigDecimal rating;
     private List<String> reviews= new ArrayList<>();

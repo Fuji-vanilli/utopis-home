@@ -13,6 +13,7 @@ public record PropertyResponse(
         String name,
         String description,
         Address address,
+        String country,
         BigDecimal price,
         BigDecimal numberOfRooms,
         BigDecimal numberOfBathrooms,

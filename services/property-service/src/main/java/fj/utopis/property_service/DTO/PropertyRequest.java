@@ -10,6 +10,7 @@ public record PropertyRequest(
         String name,
         String description,
         Address address,
+        String country,
         BigDecimal price,
         BigDecimal numberOfRooms,
         BigDecimal numberOfBathrooms,

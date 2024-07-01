@@ -12,6 +12,7 @@ public class PropertyMapperImpl implements PropertyMapper{
         return Property.builder()
                 .name(request.name())
                 .description(request.description())
+                .country(request.country())
                 .address(null)
                 .propertyType(request.propertyType())
                 .availability(request.availability())
@@ -28,6 +29,7 @@ public class PropertyMapperImpl implements PropertyMapper{
                 property.getName(),
                 property.getDescription(),
                 property.getAddress(),
+                property.getCountry(),
                 property.getPrice(),
                 property.getNumberOfRooms(),
                 property.getNumberOfBathrooms(),
