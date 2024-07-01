@@ -59,12 +59,13 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ixml
       MONGO_INITDB_ROOT_PASSWORD: 1234
+      MONGO_INITDB_DATABASE: PROPERTY-DB
     volumes:
       - mongo-property-data:/data/db
     networks:
       - utopis-networks
 
-  mongo-expres:
+  mongo-expres-user:
     image: mongo-express
     ports:
       - "8081:8081"
@@ -72,6 +73,21 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ixml
       ME_CONFIG_MONGODB_ADMINPASSWORD: 1234
       ME_CONFIG_MONGODB_SERVER: mongodb-user
+      ME_CONFIG_BASICAUTH_USERNAME: root
+      ME_CONFIG_BASICAUTH_PASSWORD: 1234
+    networks:
+      - utopis-networks
+
+  mongo-expres-property:
+    image: mongo-express
+    ports:
+      - "8082:8081"
+    expose:
+      - "8082"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ixml
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 1234
+      ME_CONFIG_MONGODB_SERVER: mongodb-property
       ME_CONFIG_BASICAUTH_USERNAME: root
       ME_CONFIG_BASICAUTH_PASSWORD: 1234
     networks:
