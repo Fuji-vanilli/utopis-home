@@ -13,7 +13,7 @@ public class PropertyMapperImpl implements PropertyMapper{
                 .name(request.name())
                 .description(request.description())
                 .country(request.country())
-                .address(null)
+                .address(request.address())
                 .propertyType(request.propertyType())
                 .availability(request.availability())
                 .numberOfRooms(request.numberOfRooms())

@@ -1,9 +1,18 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertyService {
 
+  httpClient= inject(HttpClient);
+
   constructor() { }
+
+  getAll(): Observable<any> {
+    return this.httpClient.get(environment.API_URL+'/PROPERTY-SERVICE/api/property/all');
+  }
 }

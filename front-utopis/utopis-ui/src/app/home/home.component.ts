@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { PropertyService } from '../services/property.service';
 import { Property } from '../models/property.model';
-import { error } from 'console';
+import { error, log } from 'console';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.propertyService.getAll().subscribe({
       next: response=> {
-        this.properties= response;
+        console.log("property: "+this.properties);
+        
       },
       error: err=> {
         console.log(err);
