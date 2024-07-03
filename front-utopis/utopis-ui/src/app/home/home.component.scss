@@ -1,23 +1,15 @@
 @import '../../assets/scss/bootstrap-variables';
 
-.property {
-    img {
-        border-radius: 10px;
-        width: 100%;
-        height: 270px;
-    }
-}
-
 .container {
     .row {
-        .col {
-            .card {
-                .card-body {
-                    a {
-                        color: $white;
-                    }
+        .card {
+            margin-bottom: 14px;
+            .card-body {
+                a {
+                    color: $white;
                 }
             }
         }
+
     }
 }
