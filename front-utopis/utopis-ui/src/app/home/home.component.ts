@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.propertyService.getAll().subscribe({
       next: response=> {
+        this.properties= response;
         console.log("property: "+this.properties);
         
       },

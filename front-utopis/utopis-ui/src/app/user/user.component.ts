@@ -11,7 +11,6 @@ import { PropertyService } from '../services/property.service';
 export class UserComponent implements OnInit {
 
     userService= inject(UserService);
-    propertyService= inject(PropertyService);
 
     email: string= 'NOT_EMAIL_FOUND';
     user: User | undefined;
@@ -24,19 +23,6 @@ export class UserComponent implements OnInit {
           
         }
       });
-
-      this.propertyService.getAll().subscribe({
-        next: response=> {
-          console.log("property: "+response);
-          
-        },
-        error: err=> {
-          console.log('error:'+err);
-          console.log(err);
-          
-          
-        }
-      }) 
     }
 
 }

@@ -8,6 +8,16 @@
     }
 }
 
-.contain {
-    
+.container {
+    .row {
+        .col {
+            .card {
+                .card-body {
+                    a {
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
 }
