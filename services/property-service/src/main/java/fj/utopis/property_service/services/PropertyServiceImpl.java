@@ -42,6 +42,7 @@ public class PropertyServiceImpl implements PropertyService{
 
     @Override
     public List<PropertyResponse> findAll() {
+        log.info("all properties getted successfully!");
         return repository.findAll().stream()
                 .map(mapper::mapToPropertyResponse)
                 .toList();
