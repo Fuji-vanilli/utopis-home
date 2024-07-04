@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { PropertyService } from '../services/property.service';
 import { Property } from '../models/property.model';
-import { error, log } from 'console';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
 
@@ -27,8 +27,9 @@ export class HomeComponent implements OnInit {
     }) 
   }
 
-  onFileSelected(evenet: Event) {
-
+  onFileSelected(event: Event) {
+    console.log(event);
+    
   }
 
 }

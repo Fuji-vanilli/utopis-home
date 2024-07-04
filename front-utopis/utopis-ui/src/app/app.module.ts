@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,9 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import * as LR from '@uploadcare/blocks';
+
+LR.registerBlocks(LR);
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -56,6 +59,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       deps: [KeycloakService]
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
