@@ -1,10 +1,16 @@
 <div class="container mt-5">
   <lr-config
+    ctx-name="my-uploader"
+    pubkey="aa52fc602f52f6cace87"
+  />
+  <lr-file-uploader-regular
   ctx-name="my-uploader"
-  pubkey="aa52fc602f52f6cace87"
 />
 
-<lr-file-uploader-regular ctx-name="my-uploader" />
+<lr-upload-ctx-provider
+  ctx-name="my-uploader"
+  #ctxProvider
+/>
     <div class="row">
         <div class="col-md-3" *ngFor="let property of properties">
             <div class="card" style="width: 18rem;">
